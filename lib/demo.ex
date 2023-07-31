@@ -1,18 +1,8 @@
 defmodule Demo do
-  @moduledoc """
-  Documentation for `Demo`.
-  """
+  use Ecspanse
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Demo.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  @impl Ecspanse
+  def setup(data) do
+    data
   end
 end
