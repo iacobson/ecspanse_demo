@@ -7,5 +7,6 @@ defmodule Demo do
   def setup(data) do
     data
     |> Ecspanse.add_startup_system(Systems.SpawnHero)
+    |> Ecspanse.add_system(Systems.MoveHero)
   end
 end

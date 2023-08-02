@@ -23,4 +23,9 @@ defmodule Demo.API do
         {:error, :not_found}
     end
   end
+
+  @spec move_hero(direction :: :up | :down | :left | :right) :: :ok
+  def move_hero(direction) do
+    Ecspanse.event({Demo.Events.MoveHero, direction: direction})
+  end
 end
