@@ -11,7 +11,8 @@ defmodule Demo.Entities.Hero do
      components: [
        Components.Hero,
        Components.Energy,
-       Components.Position
+       Components.Position,
+       Components.EnergyTimer
      ]}
   end
 

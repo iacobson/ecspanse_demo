@@ -22,7 +22,8 @@ defmodule Demo.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecspanse, git: "https://github.com/iacobson/ecspanse.git", branch: "main"}
+      {:ecspanse, path: "../ecspanse"}
+      # {:ecspanse, git: "https://github.com/iacobson/ecspanse.git", branch: "main"}
     ]
   end
 end
