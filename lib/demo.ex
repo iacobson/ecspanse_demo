@@ -1,4 +1,7 @@
 defmodule Demo do
+  @moduledoc """
+  The system setup module.
+  """
   use Ecspanse
 
   alias Demo.Systems
@@ -7,6 +10,7 @@ defmodule Demo do
   def setup(data) do
     data
     |> Ecspanse.add_startup_system(Systems.SpawnHero)
+    |> Ecspanse.add_startup_system(Systems.SpawnMarket)
     |> Ecspanse.add_system(Systems.RestoreEnergy, run_if: [{__MODULE__, :energy_not_max}])
     |> Ecspanse.add_system(Systems.MoveHero, after: [Systems.RestoreEnergy])
     |> Ecspanse.add_system(Systems.MaybeFindResources)

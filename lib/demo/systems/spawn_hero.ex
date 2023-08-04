@@ -7,6 +7,19 @@ defmodule Demo.Systems.SpawnHero do
 
   @impl true
   def run(_frame) do
-    %Ecspanse.Entity{} = Ecspanse.Command.spawn_entity!(Demo.Entities.Hero.new())
+    hero_entity = %Ecspanse.Entity{} = Ecspanse.Command.spawn_entity!(Demo.Entities.Hero.new())
+
+    potion_entity_1 =
+      %Ecspanse.Entity{} = Ecspanse.Command.spawn_entity!(Demo.Entities.Inventory.new_potion())
+
+    potion_entity_2 =
+      %Ecspanse.Entity{} = Ecspanse.Command.spawn_entity!(Demo.Entities.Inventory.new_potion())
+
+    boots_entity =
+      %Ecspanse.Entity{} = Ecspanse.Command.spawn_entity!(Demo.Entities.Inventory.new_boots())
+
+    Ecspanse.Command.add_children!([
+      {hero_entity, [potion_entity_1, potion_entity_2, boots_entity]}
+    ])
   end
 end
