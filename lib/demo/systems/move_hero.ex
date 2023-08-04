@@ -20,6 +20,8 @@ defmodule Demo.Systems.MoveHero do
         {energy, current: energy.current - 1},
         {position, update_coordinates(position, direction)}
       ])
+
+      Ecspanse.event(Demo.Events.MaybeFindResources)
     end
   end
 

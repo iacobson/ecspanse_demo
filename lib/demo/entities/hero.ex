@@ -12,7 +12,9 @@ defmodule Demo.Entities.Hero do
        Components.Hero,
        Components.Energy,
        Components.Position,
-       Components.EnergyTimer
+       Components.EnergyTimer,
+       {Components.Gold, [], [:available]},
+       {Components.Gems, [], [:available]}
      ]}
   end
 
