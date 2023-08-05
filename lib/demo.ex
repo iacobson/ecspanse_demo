@@ -14,6 +14,7 @@ defmodule Demo do
     |> Ecspanse.add_system(Systems.RestoreEnergy, run_if: [{__MODULE__, :energy_not_max}])
     |> Ecspanse.add_system(Systems.MoveHero, after: [Systems.RestoreEnergy])
     |> Ecspanse.add_system(Systems.MaybeFindResources)
+    |> Ecspanse.add_frame_end_system(Systems.PurchaseMarketItem)
     |> Ecspanse.add_frame_end_system(Ecspanse.System.Timer)
   end
 

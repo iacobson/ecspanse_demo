@@ -45,14 +45,8 @@ defmodule Demo.API do
 
   @spec fetch_market_items() :: {:ok, list(map())} | {:error, :not_found}
   def fetch_market_items do
-    Ecspanse.Query.select({Ecspanse.Entity}, with: [Demo.Components.Market])
-    |> Ecspanse.Query.one()
-    |> case do
-      {market_entity} ->
-        list_market_items(market_entity)
-
-      _ ->
-        {:error, :not_found}
+    with {:ok, market_entity} <- fetch_market_entity() do
+      list_market_items(market_entity)
     end
   end
 
@@ -70,5 +64,46 @@ defmodule Demo.API do
     item_entity
     |> Ecspanse.Query.list_tagged_components_for_entity([:resource, :cost])
     |> Enum.map(&%{name: &1.name, amount: &1.amount})
+  end
+
+  @spec can_purchase_market_item?(item_entity_id :: Ecspanse.Entity.id()) :: :ok
+  def can_purchase_market_item?(item_entity_id) do
+    with {:ok, item_entity} <- Ecspanse.Query.fetch_entity(item_entity_id),
+         {:ok, market_entity} <- fetch_market_entity(),
+         {:ok, hero_entity} <- Demo.Entities.Hero.fetch(),
+         true <- Ecspanse.Query.is_child_of?(parent: market_entity, child: item_entity) do
+      hero_available_resources_components =
+        Ecspanse.Query.list_tagged_components_for_entity(hero_entity, [:resource, :available])
+
+      item_cost_components =
+        Ecspanse.Query.list_tagged_components_for_entity(item_entity, [:resource, :cost])
+
+      has_enough_resources?(hero_available_resources_components, item_cost_components)
+    else
+      _ -> false
+    end
+  end
+
+  @spec purchase_market_item(item_entity_id :: Ecspanse.Entity.id()) :: :ok
+  def purchase_market_item(item_entity_id) do
+    Ecspanse.event({Demo.Events.PurchaseMarketItem, item_entity_id: item_entity_id})
+  end
+
+  defp fetch_market_entity do
+    Ecspanse.Query.select({Ecspanse.Entity}, with: [Demo.Components.Market])
+    |> Ecspanse.Query.one()
+    |> case do
+      {market_entity} -> {:ok, market_entity}
+      _ -> {:error, :not_found}
+    end
+  end
+
+  defp has_enough_resources?(available_resources, cost_resources) do
+    Enum.all?(cost_resources, fn cost_resource ->
+      Enum.any?(available_resources, fn available_resource ->
+        available_resource.id == cost_resource.id &&
+          available_resource.amount >= cost_resource.amount
+      end)
+    end)
   end
 end
