@@ -1,0 +1,100 @@
+<!-- livebook:{"persist_outputs":true} -->
+
+# Ecspanse Demo
+
+## Section
+
+```elixir
+arrow_key_map = %{
+  "ArrowUp" => :up,
+  "ArrowDown" => :down,
+  "ArrowLeft" => :left,
+  "ArrowRight" => :right
+}
+
+keyboard_control = Kino.Control.keyboard([:keydown])
+
+Kino.listen(keyboard_control, fn event ->
+  arrow_key_map[event.key]
+  |> Demo.API.move_hero()
+end)
+
+Kino.Markdown.new("# HERO ") |> Kino.render()
+
+Kino.Markdown.new("> Enable the keyboard control to move the hero with the arrow keys ")
+|> Kino.render()
+
+Kino.render(keyboard_control)
+
+Kino.animate(100, fn _i ->
+  hero = Demo.API.fetch_hero_details()
+
+  general =
+    Kino.Markdown.new("""
+      ## ENERGY: `#{hero.energy}/#{hero.max_energy}`
+      ## POSITION: `X: #{hero.pos_x}, Y: #{hero.pos_y}`
+    """)
+
+  resources =
+    Kino.Markdown.new("""
+      ## RESOURCES:
+      |Name|Amount|
+      |----|------|
+      #{Enum.map(hero.resources, fn r -> "|" <> r.name <> "|" <> inspect(r.amount) <> "|" end) |> Enum.join("\n")}
+    """)
+
+  inventory =
+    Kino.Markdown.new("""
+      ## INVENTORY:
+      |Name|
+      |----|
+      #{Enum.map(hero.inventory, fn r -> "|" <> r.name <> "|" end) |> Enum.join("\n")}
+    """)
+
+  Kino.Layout.grid([general, resources, inventory], columns: 3, boxed: true)
+end)
+```
+
+```elixir
+Kino.Markdown.new("# MARKET") |> Kino.render()
+
+Kino.animate(500, fn _i ->
+  items = Demo.API.fetch_market_items()
+
+  display_items =
+    Enum.map(items, fn item ->
+      description =
+        Kino.Markdown.new("""
+          ## #{item.name}
+          ### COST:
+          |Name|Amount|
+          |----|------|
+          #{Enum.map(item.cost, fn r -> "|" <> r.name <> "|" <> inspect(r.amount) <> "|" end) |> Enum.join("\n")}
+        """)
+
+      button =
+        if Demo.API.can_purchase_market_item?(item.entity_id) do
+          b = Kino.Control.button("BUY #{item.name}")
+
+          Kino.listen(b, fn _event ->
+            Demo.API.purchase_market_item(item.entity_id)
+          end)
+
+          b
+        else
+          Kino.Control.button("NOT ENOUGH RESOURCES")
+        end
+
+      separator =
+        Kino.Markdown.new("""
+        ---
+        ---
+        """)
+
+      [description, button, separator]
+    end)
+    |> List.flatten()
+
+  Kino.Layout.grid(display_items, columns: 1, boxed: true)
+end)
+```
