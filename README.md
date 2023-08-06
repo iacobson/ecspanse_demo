@@ -1,6 +1,8 @@
 # Ecspanse Demo
 
-This is the code used in the [Ecspanse Tutorial](https://hexdocs.pm/ecspanse/tutorial.html). [Ecspanse](https://hexdocs.pm/ecspanse/Ecspanse.html) is a an [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) library for Elixir.
+This is the code used in the [Ecspanse Tutorial](https://hexdocs.pm/ecspanse/tutorial.html).
+
+[Ecspanse](https://hexdocs.pm/ecspanse/Ecspanse.html) is a an [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) library for Elixir.
 
 ## Installation
 
