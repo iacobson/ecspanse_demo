@@ -1,5 +1,5 @@
 %{
-  "ecspanse": {:git, "https://github.com/iacobson/ecspanse.git", "4c7daf369ac76666e97c3b9f2e8c8a1aefdca110", [branch: "main"]},
+  "ecspanse": {:hex, :ecspanse, "0.1.1", "4b6e5defeb80b92fa89e32b19e2a53aa771f2dc15ed0d2eba31fa09636f5528a", [:mix], [{:elixir_uuid, "~> 1.2", [hex: :elixir_uuid, repo: "hexpm", optional: false]}, {:ex2ms, "~> 1.6", [hex: :ex2ms, repo: "hexpm", optional: false]}, {:memoize, "~> 1.4", [hex: :memoize, repo: "hexpm", optional: false]}, {:plug_crypto, "~> 1.2", [hex: :plug_crypto, repo: "hexpm", optional: false]}], "hexpm", "84ba0f2e1b0d9b487db4ee60fe10bc2eb8931002916620f1f7f9231fe3f5d0b7"},
   "elixir_uuid": {:hex, :elixir_uuid, "1.2.1", "dce506597acb7e6b0daeaff52ff6a9043f5919a4c3315abb4143f0b00378c097", [:mix], [], "hexpm", "f7eba2ea6c3555cea09706492716b0d87397b88946e6380898c2889d68585752"},
   "ex2ms": {:hex, :ex2ms, "1.6.1", "66d472eb14da43087c156e0396bac3cc7176b4f24590a251db53f84e9a0f5f72", [:mix], [], "hexpm", "a7192899d84af03823a8ec2f306fa858cbcce2c2e7fd0f1c49e05168fb9c740e"},
   "kino": {:hex, :kino, "0.10.0", "ae598b5ddabc4834585c895a1ee36dcad9d771d86188637c3e28a3f589f17fa1", [:mix], [{:nx, "~> 0.1", [hex: :nx, repo: "hexpm", optional: true]}, {:table, "~> 0.1.2", [hex: :table, repo: "hexpm", optional: false]}], "hexpm", "2239ec384fe527f173ceab3d290b45272f095250164f9794c4a65a714683d228"},

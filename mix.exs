@@ -23,7 +23,7 @@ defmodule Demo.MixProject do
   defp deps do
     [
       {:kino, "~> 0.10.0"},
-      {:ecspanse, git: "https://github.com/iacobson/ecspanse.git", branch: "main"}
+      {:ecspanse, "~> 0.1.0"}
     ]
   end
 end
