@@ -1,7 +1,9 @@
 defmodule Demo.Components.Gold do
   @moduledoc """
-  Gold resource.
+  Gold resourceg, defined from the generic resource component.
   Can be used as both available and cost.
   """
-  use Ecspanse.Component, state: [id: :gold, name: "Gold", amount: 0], tags: [:resource]
+  use Demo.Components.Resource,
+    state: [id: :gold, name: "Gold", amount: 0],
+    tags: [:resource]
 end

@@ -3,5 +3,5 @@ defmodule Demo.Events.EnergyTimerFinished do
   Timer event
   The energy timer has reached zero.
   """
-  use Ecspanse.Event.Timer
+  use Ecspanse.Template.Event.Timer
 end

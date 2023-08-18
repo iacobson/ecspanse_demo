@@ -1,7 +1,9 @@
 defmodule Demo.Components.Gems do
   @moduledoc """
-  Gems resource.
+  Gems resource defined from the generic resource component.
   Can be used as both available and cost.
   """
-  use Ecspanse.Component, state: [id: :gems, name: "Gems", amount: 0], tags: [:resource]
+  use Demo.Components.Resource,
+    state: [id: :gems, name: "Gems", amount: 0],
+    tags: [:resource]
 end
