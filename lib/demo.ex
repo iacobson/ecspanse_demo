@@ -16,6 +16,7 @@ defmodule Demo do
     |> Ecspanse.add_system(Systems.MaybeFindResources)
     |> Ecspanse.add_frame_end_system(Systems.PurchaseMarketItem)
     |> Ecspanse.add_frame_end_system(Ecspanse.System.Timer)
+    |> Ecspanse.add_frame_end_system(Ecspanse.System.TrackFPS)
   end
 
   def energy_not_max do

@@ -5,6 +5,17 @@
 ## Section
 
 ```elixir
+Kino.animate(1000, fn _i ->
+  {:ok, fps} = Ecspanse.Query.fetch_resource(Ecspanse.Resource.FPS)
+
+  Kino.Markdown.new("""
+  ---
+  # FPS: **#{fps.value}**
+  """)
+end)
+```
+
+```elixir
 arrow_key_map = %{
   "ArrowUp" => :up,
   "ArrowDown" => :down,
