@@ -4,12 +4,12 @@ defmodule Demo.Systems.MaybeFindResources do
   """
   use Ecspanse.System,
     lock_components: [Demo.Components.Gems, Demo.Components.Gold],
-    event_subscriptions: [Ecspanse.Event.ComponentUpdated]
+    event_subscriptions: [Demo.Events.HeroMoved]
 
   alias Demo.Components
 
   @impl true
-  def run(%Ecspanse.Event.ComponentUpdated{component: %Demo.Components.Position{}}, _frame) do
+  def run(%Demo.Events.HeroMoved{}, _frame) do
     with true <- found_resource?(),
          resource_module <- pick_resource(),
          {:ok, hero_entity} <- Demo.Entities.Hero.fetch(),

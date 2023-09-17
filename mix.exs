@@ -23,7 +23,8 @@ defmodule Demo.MixProject do
   defp deps do
     [
       {:kino, "~> 0.10.0"},
-      {:ecspanse, "~> 0.3.1"}
+      {:eflambe, "~> 0.3.0"},
+      {:ecspanse, "~> 0.4.0"}
     ]
   end
 end

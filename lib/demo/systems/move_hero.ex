@@ -20,6 +20,8 @@ defmodule Demo.Systems.MoveHero do
         {energy, current: energy.current - 1},
         {position, update_coordinates(position, direction)}
       ])
+
+      Ecspanse.event(Demo.Events.HeroMoved)
     end
   end
 
@@ -37,6 +39,7 @@ defmodule Demo.Systems.MoveHero do
       :down -> [x: x, y: y - 1]
       :left -> [x: x - 1, y: y]
       :right -> [x: x + 1, y: y]
+      _ -> [x: x, y: y]
     end
   end
 end
