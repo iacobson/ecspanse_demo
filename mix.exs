@@ -24,7 +24,7 @@ defmodule Demo.MixProject do
     [
       {:kino, "~> 0.11.0"},
       {:eflambe, "~> 0.3.0"},
-      {:ecspanse, "~> 0.7.0"}
+      {:ecspanse, "~> 0.8.1"}
     ]
   end
 end
