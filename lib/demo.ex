@@ -11,7 +11,7 @@ defmodule Demo do
     data
     |> Ecspanse.add_startup_system(Systems.SpawnHero)
     |> Ecspanse.add_startup_system(Systems.SpawnMarket)
-    |> Ecspanse.add_system(Systems.RestoreEnergy, run_if: [{__MODULE__, :energy_not_max}])
+    |> Ecspanse.add_system(Systems.RestoreEnergy, run_if: [{__MODULE__, :energy_not_max?}])
     |> Ecspanse.add_system(Systems.MoveHero, run_after: [Systems.RestoreEnergy])
     |> Ecspanse.add_system(Systems.MaybeFindResources)
     |> Ecspanse.add_frame_end_system(Systems.PurchaseMarketItem)
@@ -19,7 +19,8 @@ defmodule Demo do
     |> Ecspanse.add_frame_end_system(Ecspanse.System.TrackFPS)
   end
 
-  def energy_not_max do
+  @spec energy_not_max?() :: boolean()
+  def energy_not_max? do
     # not the most efficient way to do this, as this will run every frame
     # but it's a good example of how to use the `run_if` option
 
