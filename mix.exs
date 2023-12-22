@@ -22,9 +22,9 @@ defmodule Demo.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:kino, "~> 0.10.0"},
+      {:kino, "~> 0.11.0"},
       {:eflambe, "~> 0.3.0"},
-      {:ecspanse, "~> 0.4.0"}
+      {:ecspanse, "~> 0.7.0"}
     ]
   end
 end

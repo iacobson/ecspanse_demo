@@ -35,7 +35,28 @@ Kino.Markdown.new("# HERO ") |> Kino.render()
 Kino.Markdown.new("> Enable the keyboard control to move the hero with the arrow keys ")
 |> Kino.render()
 
-Kino.render(keyboard_control)
+# bug in Livebook 
+# fixed but not in the last version
+# https://github.com/livebook-dev/livebook/blame/main/lib/livebook_web/live/output/control_component.ex#L17
+# Kino.render(keyboard_control)
+
+Kino.Markdown.new("#### Button Control ") |> Kino.render()
+
+left = Kino.Control.button("⬅️")
+down = Kino.Control.button("⬇️")
+up = Kino.Control.button("⬆️")
+right = Kino.Control.button("➡️")
+
+[left: left, down: down, up: up, right: right]
+|> Kino.Control.tagged_stream()
+|> Kino.listen(fn {direction, _} ->
+  Demo.API.move_hero(direction)
+end)
+
+Kino.Layout.grid([left, down, up, right], columns: 4, boxed: true)
+|> Kino.render()
+
+# Hero details
 
 Kino.animate(100, fn _i ->
   hero = Demo.API.fetch_hero_details()
